@@ -112,7 +112,12 @@ public class UserDocumentationService {
 	
 	@Transactional
 	public void delete(Long id) {
-	    try {
+	    if(!documentationRepository.existsById(id)){
+	    	throw new DesafioException("ID not Found: " +id);
+	    }
+		
+		
+		try {
 	        documentationRepository.deleteById(id);
 	    } catch (EmptyResultDataAccessException e) {
 	        throw new DesafioException("Documento não encontrado");
