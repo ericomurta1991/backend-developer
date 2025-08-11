@@ -84,7 +84,7 @@ Content-Type: multipart/form-data
 Mesmos campos do POST; file pode ser omitido para manter arquivo anterior.
 
 
-###Paginação
+### Paginação
 Todas as listas paginadas aceitam os parâmetros:
 
 page (número da página, default 0)
@@ -95,7 +95,7 @@ Exemplo:
 
 GET /users?page=1&limit=5
 
-###Tratamento de Erros
+### Tratamento de Erros
 A API retorna erros padronizados com JSON contendo:
 
 timestamp: data e hora do erro
@@ -118,7 +118,7 @@ Exemplos de erros comuns:
 500 Internal Server Error: erro inesperado
 
 
-###Observações
+### Observações
 O CPF deve seguir o formato "XXX.XXX.XXX-XX" e ser único.
 
 O nome do usuário deve ter no máximo 50 caracteres.
