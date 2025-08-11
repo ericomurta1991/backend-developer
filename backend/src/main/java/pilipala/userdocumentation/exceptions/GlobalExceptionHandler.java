@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -62,7 +63,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
     
-    //novo tratamento
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> handleValidationException(MethodArgumentNotValidException ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST; // 400
@@ -79,6 +80,21 @@ public class GlobalExceptionHandler {
         err.setStatus(status.value());
         err.setError("Bad Request");
         err.setMessage(errorMessages);
+        err.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+    }
+    
+    //novo tratamento
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<StandardError> handleMaxSizeException(MaxUploadSizeExceededException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Bad Request");
+        err.setMessage("Arquivo excede o tamanho máximo permitido de 2MB");
         err.setPath(request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
