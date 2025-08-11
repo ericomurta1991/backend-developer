@@ -38,7 +38,7 @@ public class UserDocumentation implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name= "type", nullable = false)
-	private DocumentType type; //ex: CPF, CPNJ, Outros
+	private DocumentType type; 
 	@Column(nullable = false)
 	private String number; //numero documento
 	
