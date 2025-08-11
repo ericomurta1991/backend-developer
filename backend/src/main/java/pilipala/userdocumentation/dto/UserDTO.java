@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.caelum.stella.bean.validation.CPF;
+import jakarta.validation.constraints.Pattern;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,6 +27,7 @@ public class UserDTO implements Serializable{
 	@Schema(description = "Nome completo do usuário", example = "PiliPala")
 	private String name;
 	@NotBlank(message = "CPF é obrigatório")
+	@Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "CPF deve estar no formato XXX.XXX.XXX-XX")
 	@CPF(message = "CPF inválido")
 	@Schema(description = "CPF do usuário no formato XXX.XXX.XXX-XX", example = "123.456.789-00")
 	private String cpf;
