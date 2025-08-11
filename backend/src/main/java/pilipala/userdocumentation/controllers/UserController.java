@@ -5,7 +5,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,14 +45,11 @@ public class UserController {
 	 	})
 	    @GetMapping
 	    public ResponseEntity<Page<UserDTO>> findAll(
-	            @RequestParam(value = "page", defaultValue = "0") Integer page,
-	            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
-	            @RequestParam(value = "direction", defaultValue = "ASC") String direction,
-	            @RequestParam(value = "orderBy", defaultValue = "name") String orderBy) {
+	            @RequestParam(value = "page", defaultValue = "0") int page,
+	            @RequestParam(value = "limit", defaultValue = "12") int limit) {
 
-	        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-
-	        Page<UserDTO> list = service.findAllPaged(pageRequest);
+	        Pageable pageable = PageRequest.of(page, limit);
+	        Page<UserDTO> list = service.findAllPaged(pageable);
 	        return ResponseEntity.ok().body(list);
 	    }
 

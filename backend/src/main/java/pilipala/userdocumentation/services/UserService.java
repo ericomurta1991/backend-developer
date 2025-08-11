@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -21,9 +21,9 @@ public class UserService {
 	UserRepository repository;
 	
 	@Transactional
-	public Page<UserDTO> findAllPaged(PageRequest pageRequest){
-		Page<User> list = repository.findAll(pageRequest);
-		return list.map(x -> new UserDTO(x));
+	public Page<UserDTO> findAllPaged(Pageable pageable){
+	    Page<User> list = repository.findAll(pageable);
+	    return list.map(x -> new UserDTO(x));
 	}
 	
 	@Transactional
