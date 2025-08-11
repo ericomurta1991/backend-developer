@@ -21,7 +21,7 @@ public class UserDTO implements Serializable{
 	private static final long serialVersionUID =1L;
 	@Schema(description = "ID do usuário", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
 	private long id;
-	@NotBlank
+	@NotBlank(message = "Nome é obrigatorio.")
 	@Size(max = 50, message = "Nome deve ter no maximo 50 caracteres")
 	@Schema(description = "Nome completo do usuário", example = "PiliPala")
 	private String name;
@@ -30,6 +30,7 @@ public class UserDTO implements Serializable{
 	@Schema(description = "CPF do usuário no formato XXX.XXX.XXX-XX", example = "123.456.789-00")
 	private String cpf;
 	
+	@Schema(description = "Lista de documentações associadas ao usuário")
 	private List<UserDocumentationDTO> documentations = new ArrayList<>();
 	
 	
