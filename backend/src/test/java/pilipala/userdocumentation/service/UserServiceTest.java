@@ -58,7 +58,7 @@ public class UserServiceTest {
 
         assertThrows(DesafioException.class, () -> {
             service.findById(noExistingId);
-        });
+        }); 
     }
 
 
