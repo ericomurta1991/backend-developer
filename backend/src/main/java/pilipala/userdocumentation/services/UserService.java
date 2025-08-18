@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -29,7 +30,7 @@ public class UserService {
 	@Transactional
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		User entity = obj.orElseThrow(() -> new DesafioException("Usuário não encontrado com id: " + id));
+		User entity = obj.orElseThrow(() -> new DesafioException("Usuário não encontrado com id: " + id , HttpStatus.NOT_FOUND));
 		return new UserDTO(entity);
 	}
 	
